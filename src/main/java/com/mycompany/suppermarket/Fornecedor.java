@@ -66,5 +66,47 @@ public class Fornecedor {
         this.cep = cep;
     }
     
-    
+    public static boolean validaCNPJ(String cnpj) {
+    if (cnpj == null || cnpj.length() != 14)
+        return false;
+
+    try {
+        Long.valueOf(cnpj);
+    } catch (NumberFormatException e) {
+        return false;
+    }
+
+    int[] weights = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+
+    int[] cnpjIntArray = new int[14];
+    for (int i = 0; i < cnpj.length(); i++) {
+        cnpjIntArray[i] = Integer.parseInt(cnpj.substring(i, i + 1));
+    }
+
+    int sum = 0;
+    for (int i = 0; i < 12; i++) {
+        sum += cnpjIntArray[i] * weights[i + 1];
+    }
+
+    int remainder = sum % 11;
+    if (remainder < 2) {
+        cnpjIntArray[12] = 0;
+    } else {
+        cnpjIntArray[12] = 11 - remainder;
+    }
+
+    sum = 0;
+    for (int i = 0; i < 13; i++) {
+        sum += cnpjIntArray[i] * weights[i];
+    }
+
+    remainder = sum % 11;
+    if (remainder < 2) {
+        cnpjIntArray[13] = 0;
+    } else {
+        cnpjIntArray[13] = 11 - remainder;
+    }
+
+    return cnpj.endsWith(cnpjIntArray[12] + "" + cnpjIntArray[13]);
+}
 }
