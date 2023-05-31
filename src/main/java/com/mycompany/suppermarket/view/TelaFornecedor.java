@@ -2,7 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.suppermarket;
+package com.mycompany.suppermarket.view;
+
+import com.mycompany.suppermarket.controller.EnderecoController;
+import com.mycompany.suppermarket.controller.FornecedorController;
+import com.mycompany.suppermarket.model.Endereco;
+import com.mycompany.suppermarket.model.Fornecedor;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,12 +43,12 @@ public class TelaFornecedor extends javax.swing.JFrame {
         txtCNPJ = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        txtRG = new javax.swing.JTextField();
+        jTableFornecedor = new javax.swing.JTable();
+        txtIE = new javax.swing.JTextField();
         btnCad = new javax.swing.JButton();
         btnEx = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextEnd = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtCEP = new javax.swing.JTextField();
 
@@ -47,16 +56,38 @@ public class TelaFornecedor extends javax.swing.JFrame {
         setResizable(false);
 
         btnAtt.setText("Atualizar");
+        btnAtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAttActionPerformed(evt);
+            }
+        });
 
         btnPro.setText("Procurar");
+        btnPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProActionPerformed(evt);
+            }
+        });
+
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nome:");
 
         jLabel2.setText("CNPJ:");
 
+        txtCNPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCNPJActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("IE:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -75,15 +106,43 @@ public class TelaFornecedor extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableFornecedor);
+
+        txtIE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIEActionPerformed(evt);
+            }
+        });
 
         btnCad.setText("Cadastrar");
+        btnCad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadActionPerformed(evt);
+            }
+        });
 
         btnEx.setText("Excluir");
+        btnEx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Endereço:");
 
+        jTextEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextEndActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("CEP:");
+
+        txtCEP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCEPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,11 +172,11 @@ public class TelaFornecedor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtIE, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1))
+                                .addComponent(jTextEnd))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -142,9 +201,9 @@ public class TelaFornecedor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -161,6 +220,82 @@ public class TelaFornecedor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+
+    }//GEN-LAST:event_txtNomeActionPerformed
+
+    private void txtCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCNPJActionPerformed
+
+    }//GEN-LAST:event_txtCNPJActionPerformed
+
+    private void jTextEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEndActionPerformed
+
+    }//GEN-LAST:event_jTextEndActionPerformed
+
+    private void txtIEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIEActionPerformed
+
+    }//GEN-LAST:event_txtIEActionPerformed
+
+    private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadActionPerformed
+        try {
+        FornecedorController fornecedorController = new FornecedorController();
+        EnderecoController enderecoController = new EnderecoController();
+
+        Endereco endereco = new Endereco(jTextEnd.getText(), txtCEP.getText());
+        Fornecedor fornecedor = new Fornecedor(txtNome.getText(), txtCNPJ.getText(), txtIE.getText(), endereco);
+
+        fornecedorController.cadastrarFornecedor(fornecedor);
+        
+        JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");
+
+        txtNome.setText("");
+        txtCNPJ.setText("");
+        txtIE.setText("");
+        jTextEnd.setText("");
+        txtCEP.setText("");
+    } catch (SQLException | ClassNotFoundException ex) {
+    Logger.getLogger(TelaFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+    if (ex instanceof java.sql.SQLIntegrityConstraintViolationException) {
+        JOptionPane.showMessageDialog(this, "CNPJ duplicado", "Erro", JOptionPane.ERROR_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro ao cadastrar fornecedor: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+    }
+    }//GEN-LAST:event_btnCadActionPerformed
+
+    private void btnProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProActionPerformed
+        try {
+            FornecedorController fornecedor = new FornecedorController();
+            fornecedor.buscarCNPJ(txtCNPJ.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnProActionPerformed
+
+    private void btnAttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAttActionPerformed
+
+    private void btnExActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExActionPerformed
+        try {
+            FornecedorController fornecedor = new FornecedorController();
+            fornecedor.deletarCNPJ(txtCNPJ.getText());
+            JOptionPane.showMessageDialog(this, "Fornecedor Excluído com sucesso");
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+            
+    }//GEN-LAST:event_btnExActionPerformed
+
+    private void txtCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEPActionPerformed
+
+    }//GEN-LAST:event_txtCEPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,11 +343,11 @@ public class TelaFornecedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTableFornecedor;
+    private javax.swing.JTextField jTextEnd;
     private javax.swing.JTextField txtCEP;
     private javax.swing.JTextField txtCNPJ;
+    private javax.swing.JTextField txtIE;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtRG;
     // End of variables declaration//GEN-END:variables
 }

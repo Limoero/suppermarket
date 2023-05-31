@@ -2,15 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.suppermarket;
+package com.mycompany.suppermarket.view;
 
 /**
  *
  * @author diego.mvogelsanger
  */
-public class Suppermarket {
+public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        TelaPrincipal tela = new TelaPrincipal();
+        tela.setVisible(true);
     }
 }

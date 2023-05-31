@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.suppermarket;
+package com.mycompany.suppermarket.model;
 
 /**
  *
@@ -12,8 +12,7 @@ public class Fornecedor {
     private String nome;
     private String cnpj;
     private String ie;
-    private String endereco;
-    private String cep;
+    private Endereco endereco;
 
     public String getNome() {
         return nome;
@@ -39,31 +38,19 @@ public class Fornecedor {
         this.ie = ie;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public Fornecedor() {
-    }
-
-    public Fornecedor(String nome, String cnpj, String ie, String endereco, String cep) {
+    public Fornecedor(String nome, String cnpj, String ie, Endereco endereco) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.ie = ie;
         this.endereco = endereco;
-        this.cep = cep;
     }
     
     public static boolean validaCNPJ(String cnpj) {
